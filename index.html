@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Idul Fitri</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+overflow:hidden;
+font-family:serif;
+}
+
+/* opening screen */
+
+#opening{
+position:fixed;
+inset:0;
+background:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
+color:white;
+text-align:center;
+}
+
+.btn-open{
+background:white;
+color:black;
+padding:10px 25px;
+border-radius:30px;
+margin-top:20px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn-open:hover{
+transform:scale(1.1);
+}
+
+/* ketupat animation */
+
+.ketupat{
+position:absolute;
+top:-50px;
+font-size:25px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-50px);
+}
+
+100%{
+transform:translateY(110vh);
+}
+
+}
+
+/* confetti */
+
+.confetti{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+animation:fall 5s linear infinite;
+}
+
+</style>
+
+</head>
+
+<body class="bg-black">
+
+<!-- OPENING -->
+
+<div id="opening">
+
+<h1 class="text-3xl md:text-5xl mb-3">
+Selamat Hari Raya
+</h1>
+
+<p class="text-gray-300">
+Klik untuk membuka ucapan
+</p>
+
+<button onclick="start()" class="btn-open">
+Buka Ucapan
+</button>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div id="main" class="hidden h-screen w-screen relative">
+
+<!-- background -->
+
+<div class="absolute inset-0 bg-cover bg-center"
+style="background-image:url('foto.jpg')"></div>
+
+<div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+<!-- konten -->
+
+<div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
+
+<img src="foto1.jpg"
+class="w-64 md:w-80 rounded-2xl shadow-2xl border-4 border-white/30 mb-6">
+
+<h1 class="text-4xl md:text-6xl font-bold mb-3">
+
+Selamat Hari Raya
+
+</h1>
+
+<h2 class="text-2xl md:text-4xl text-green-300 mb-4">
+
+Idul Fitri 1447 H
+
+</h2>
+
+<p class="max-w-xl text-sm md:text-lg leading-relaxed">
+
+Taqabbalallahu minna wa minkum  
+Shiyamana wa shiyamakum  
+
+Mohon maaf lahir dan batin 🙏
+
+</p>
+
+<div class="flex gap-4 mt-8">
+
+<button onclick="shareWA()"
+class="px-6 py-2 bg-white text-black rounded-full hover:scale-110 transition">
+
+Share WhatsApp
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- musik -->
+
+<audio id="music" loop>
+
+<source src="musik1.mp3" type="audio/mpeg">
+
+</audio>
+
+<script>
+
+function start(){
+
+document.getElementById("opening").style.display="none"
+
+document.getElementById("main").classList.remove("hidden")
+
+document.getElementById("music").play()
+
+createKetupat()
+
+createConfetti()
+
+}
+
+/* ketupat */
+
+function createKetupat(){
+
+for(let i=0;i<15;i++){
+
+let k=document.createElement("div")
+
+k.className="ketupat"
+
+k.innerHTML="🟢"
+
+k.style.left=Math.random()*100+"%"
+
+k.style.animationDuration=(5+Math.random()*5)+"s"
+
+document.body.appendChild(k)
+
+}
+
+}
+
+/* confetti */
+
+function createConfetti(){
+
+for(let i=0;i<40;i++){
+
+let c=document.createElement("div")
+
+c.className="confetti"
+
+c.style.left=Math.random()*100+"%"
+
+c.style.animationDuration=(3+Math.random()*5)+"s"
+
+document.body.appendChild(c)
+
+}
+
+}
+
+/* share */
+
+function shareWA(){
+
+let text=encodeURIComponent(
+"Selamat Hari Raya Idul Fitri 1447 H 🙏 Mohon Maaf Lahir Batin\n\nLihat ucapan disini:\n"+window.location.href
+)
+
+window.open("https://wa.me/?text="+text)
+
+}
+
+</script>
+
+</body>
+</html>
